@@ -1,0 +1,63 @@
+.control-container{
+  display: flex;
+}
+
+.elevator-status {
+  margin-bottom: 10px;
+}
+
+button {
+  margin-right: 10px;
+}
+
+.algorithm-select {
+  width: 15vw;
+}
+
+.content{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  @media (max-width: 1300px) {
+    flex-direction: column;
+  }
+}
+
+.status-container{
+  width: 50%;
+  @media (max-width: 1300px) {
+    width: 100%;
+  }
+}
+
+.pickup-control-container{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  @media (max-width: 1300px) {
+    width: 100%;
+  }
+}
+
+
+.direction-icon {
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+.direction-icon.up {
+  color: green;
+}
+
+.direction-icon.down {
+  color: red;
+}
+
+
+mat-card {
+  margin: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+}

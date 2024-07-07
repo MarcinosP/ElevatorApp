@@ -1,0 +1,113 @@
+<mat-toolbar color="primary">
+  <span>AVSystems Elevator App</span>
+</mat-toolbar>
+
+<div class="content">
+  <div class="status-container">
+    <mat-card>
+      <mat-card-content>
+        <h2>Elevator Status</h2>
+        <div *ngFor="let elevator of elevators" class="elevator-status">
+          <p>
+            Elevator {{ elevator.id }}: Current Floor:
+            {{ elevator.currentFloor }}, Target Floor:
+            {{ elevator.targetFloor }}, Status: {{ elevator.status }}
+            <mat-icon class="direction-icon up" *ngIf="elevator.direction === 1"
+              >arrow_upward</mat-icon
+            >
+            <mat-icon
+              class="direction-icon down"
+              *ngIf="elevator.direction === -1"
+              >arrow_downward</mat-icon
+            >
+          </p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="pickup-control-container">
+    <mat-card>
+      <mat-card-content>
+        <h2>Pickup</h2>
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Select Elevator</mat-label>
+            <mat-select [(ngModel)]="selectedElevatorId">
+              <mat-option
+                *ngFor="let elevator of elevators"
+                [value]="elevator.id"
+              >
+                Elevator {{ elevator.id }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br />
+          <mat-form-field appearance="fill">
+            <mat-label>Start Floor</mat-label>
+            <input
+              matInput
+              type="number"
+              [(ngModel)]="startFloor"
+              name="startFloor"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Target Floor</mat-label>
+            <input
+              matInput
+              type="number"
+              [(ngModel)]="targetFloor"
+              name="targetFloor"
+            />
+          </mat-form-field>
+          <br />
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="
+              initiatePickup(selectedElevatorId, startFloor, targetFloor)
+            "
+          >
+            Pickup
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-content>
+        <h2>Control</h2>
+        <div class="control-container">
+          <div>
+            <button mat-raised-button color="warn" (click)="stopAllElevators()">
+              Stop All Elevators
+            </button>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="continueAllElevators()"
+            >
+              Continue All Elevators
+            </button>
+          </div>
+          <div>
+            <mat-form-field appearance="fill" class="algorithm-select">
+              <mat-label>Select Algorithm</mat-label>
+              <mat-select
+                [(ngModel)]="algorithm"
+                (selectionChange)="changeAlgorithm()"
+              >
+                <mat-option [value]="AlgorithmType.FCFS"
+                  >First Come First Serve</mat-option
+                >
+                <mat-option [value]="AlgorithmType.ELEVATOR_ALGORITHM"
+                  >Elevator Algorithm</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
